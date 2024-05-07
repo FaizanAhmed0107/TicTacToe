@@ -1,5 +1,5 @@
 :root {
-  --scale: 100vh;
+  --scale: min(100vh, 100vw);
 }
 
 #grid {
