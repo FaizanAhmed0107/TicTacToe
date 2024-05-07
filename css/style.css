@@ -33,6 +33,7 @@
 
 body {
   background-color: #7fcb7c;
+  text-size-adjust: none;
 }
 
 p {
