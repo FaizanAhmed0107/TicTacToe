@@ -21,6 +21,12 @@ let curr = 0;
 let steps = 0;
 let status = 0;
 
+let i = 1;
+while (i <= 9) {
+  buttons[i].style.fontSize = Math.min(buttons[i].offsetWidth, buttons[i].offsetWidth) * 0.8 + 'px';
+  i += 1;
+}
+
 
 button1.onclick = clkButton1;
 button2.onclick = clkButton2;
