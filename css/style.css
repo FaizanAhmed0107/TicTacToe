@@ -6,8 +6,8 @@
   --size: min(90vh, 90vw);
   width: var(--size);
   height: var(--size);
-  max-height: 500px;
-  max-width: 500px;
+  max-height: 14cm;
+  max-width: 14cm;
   gap: 3%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
