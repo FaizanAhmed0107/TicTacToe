@@ -1,7 +1,3 @@
-:root {
-  --scale: min(100vh, 100vw);
-}
-
 #grid {
   --size: min(90vh, 90vw);
   width: var(--size);
