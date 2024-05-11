@@ -9,6 +9,7 @@ const button8 = document.querySelector('#b8');
 const button9 = document.querySelector('#b9');
 const bottomText = document.querySelector('#bottomText');
 const topText = document.querySelector('#topText');
+const rstButton = document.querySelector('#restart');
 
 const playBox = [
   [' ', ' ', ' '],
@@ -20,13 +21,15 @@ const buttons = [button1, button1, button2, button3, button4, button5, button6, 
 let curr = 0;
 let steps = 0;
 let status = 0;
+let options = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+let mode = 1;
 
 let i = 1;
 while (i <= 9) {
   buttons[i].style.fontSize = Math.min(buttons[i].offsetWidth, buttons[i].offsetWidth) * 0.8 + 'px';
   i += 1;
 }
-
+rstButton.style.visibility = 'hidden';
 
 button1.onclick = clkButton1;
 button2.onclick = clkButton2;
@@ -37,6 +40,7 @@ button6.onclick = clkButton6;
 button7.onclick = clkButton7;
 button8.onclick = clkButton8;
 button9.onclick = clkButton9;
+rstButton.onclick = restart;
 
 
 function getVal(pos) {
@@ -84,51 +88,130 @@ function setVal(pos, val) {
 function click(n) {
   if (status === 0) {
     if (getVal(n) === ' ') {
+      options.splice(options.indexOf(n), 1);
       setVal(n, symbol[curr])
       buttons[n].innerText = symbol[curr];
       steps += 1;
       checkEnd();
       curr = (curr + 1) % 2;
       topText.innerText = "Player " + (curr + 1) + "'s turn";
-    } else
-      bottomText.innerText = "InValid Selection";
+      return true;
+    } else {
+      bottomText.innerText = "InValid Selection" + n;
+      return false;
+    }
   }
 }
 
+function tryWin(a, b, c, sym) {
+  if (getVal(a) === getVal(b) && getVal(c) === ' ' && getVal(a) === symbol[sym])
+    return c;
+  else if (getVal(a) === getVal(c) && getVal(b) === ' ' && getVal(a) === symbol[sym])
+    return b;
+  else if (getVal(c) === getVal(b) && getVal(a) === ' ' && getVal(b) === symbol[sym])
+    return a;
+  else
+    return -1;
+}
+
+
+function win() {
+  let x;
+  if ((x = tryWin(1, 2, 3, curr)) !== -1) {
+    return x;
+  } else if ((x = tryWin(4, 5, 6, curr)) !== -1) {
+    return x;
+  } else if ((x = tryWin(7, 8, 9, curr)) !== -1) {
+    return x;
+  } else if ((x = tryWin(7, 4, 1, curr)) !== -1) {
+    return x;
+  } else if ((x = tryWin(8, 5, 2, curr)) !== -1) {
+    return x;
+  } else if ((x = tryWin(9, 6, 3, curr)) !== -1) {
+    return x;
+  } else if ((x = tryWin(7, 5, 3, curr)) !== -1) {
+    return x;
+  } else if ((x = tryWin(1, 5, 9, curr)) !== -1) {
+    return x;
+  } else
+    return -1;
+}
+
+function block() {
+  let x, y = (curr + 1) % 2;
+  if ((x = tryWin(1, 2, 3, y)) !== -1) {
+    return x;
+  } else if ((x = tryWin(4, 5, 6, y)) !== -1) {
+    return x;
+  } else if ((x = tryWin(7, 8, 9, y)) !== -1) {
+    return x;
+  } else if ((x = tryWin(7, 4, 1, y)) !== -1) {
+    return x;
+  } else if ((x = tryWin(8, 5, 2, y)) !== -1) {
+    return x;
+  } else if ((x = tryWin(9, 6, 3, y)) !== -1) {
+    return x;
+  } else if ((x = tryWin(7, 5, 3, y)) !== -1) {
+    return x;
+  } else if ((x = tryWin(1, 5, 9, y)) !== -1) {
+    return x;
+  } else
+    return -1;
+}
+
+function AIInput() {
+  let x;
+  if ((x = win()) === -1) {
+    if ((x = block()) === -1) {
+      x = options[Math.floor(Math.random() * options.length)];
+    }
+  }
+  click(x);
+}
+
 function clkButton1() {
-  click(1);
+  if (click(1) && mode === 1)
+    AIInput();
 }
 
 function clkButton2() {
-  click(2);
+  if (click(2) && mode === 1)
+    AIInput();
 }
 
 function clkButton3() {
-  click(3);
+  if (click(3) && mode === 1)
+    AIInput();
 }
 
 function clkButton4() {
-  click(4);
+  if (click(4) && mode === 1)
+    AIInput();
 }
 
 function clkButton5() {
-  click(5);
+  if (click(5) && mode === 1)
+    AIInput();
 }
 
 function clkButton6() {
-  click(6);
+  if (click(6) && mode === 1)
+    AIInput();
 }
 
 function clkButton7() {
-  click(7);
+  if (click(7) && mode === 1)
+    AIInput();
 }
 
 function clkButton8() {
-  click(8);
+  if (click(8) && mode === 1)
+    AIInput();
 }
 
 function clkButton9() {
-  click(9);
+  if (click(9) && mode === 1)
+    AIInput();
 }
 
 function end(curr) {
@@ -137,42 +220,49 @@ function end(curr) {
   else
     bottomText.innerText = "Player " + (curr + 1) + " Won!";
   status = -1;
+  rstButton.style.visibility = 'visible';
 }
 
 function checkWin(a, b, c) {
   return getVal(a) === getVal(b) && getVal(a) === getVal(c) && getVal(b) !== ' ';
 }
 
+function highlight(a, b, c) {
+  buttons[a].style.backgroundColor = 'green';
+  buttons[b].style.backgroundColor = 'green';
+  buttons[c].style.backgroundColor = 'green';
+}
+
 function checkEnd() {
   if (checkWin(1, 2, 3)) {
     end(curr);
-    restart();
+    highlight(1, 2, 3);
   } else if (checkWin(4, 5, 6)) {
     end(curr);
-    restart();
+    highlight(4, 5, 6);
   } else if (checkWin(7, 8, 9)) {
     end(curr);
-    restart();
+    highlight(7, 8, 9);
   } else if (checkWin(7, 4, 1)) {
     end(curr);
-    restart();
+    highlight(7, 4, 1);
   } else if (checkWin(8, 5, 2)) {
     end(curr);
-    restart();
+    highlight(8, 5, 2);
   } else if (checkWin(9, 6, 3)) {
     end(curr);
-    restart();
+    highlight(9, 6, 3);
   } else if (checkWin(1, 5, 9)) {
     end(curr);
-    restart();
+    highlight(1, 5, 9);
   } else if (checkWin(3, 5, 7)) {
     end(curr);
-    restart();
+    highlight(3, 5, 7);
   } else if (steps >= 9) {
     end(-1);
-    restart();
   }
 }
 
 function restart() {
+  location.reload();
 }

@@ -8,12 +8,14 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
+  background-color: black;
+  border-radius: 5%;
 }
 
 #box {
-  padding: 0 5%;
+  padding: 2% 5%;
   border-radius: 1%;
-  background-color: #ffffff2f;
+  background-color: #c1a3de;
   box-shadow: 5px 5px 6px gray;
 
   height: fit-content;
@@ -39,14 +41,20 @@ p {
   color: #6d479f;
 }
 
-button {
+#b1, #b2, #b3, #b4, #b5, #b6, #b7, #b8, #b9 {
   border-radius: 5%;
+  background-color: #c1a3de;
   border-color: #00000000;
-  box-shadow: 3px 3px 3px dimgrey;
   width: 100%;
   height: 100%;
-  color: #7fcb7c;
+  color: #ebef99;
   font-family: monospace;
   cursor: pointer;
 }
 
+#restart {
+  display: block;
+  margin: auto;
+  border-radius: 5px;
+  border-color: rgba(127, 203, 124, 0);
+}
