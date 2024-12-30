@@ -22,7 +22,7 @@ let curr = 0;
 let steps = 0;
 let status = 0;
 let options = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-let mode = 1;
+let mode = 1;  //0 for SP and 1 for MP
 
 let i = 1;
 while (i <= 9) {
@@ -264,5 +264,18 @@ function checkEnd() {
 }
 
 function restart() {
-  location.reload();
+  //location.reload();
+  let i = 1;
+  while (i <= 9) {
+    setVal(i, ' ')
+    buttons[i].style.backgroundColor = '#c1a3de';
+    buttons[i].innerText = ' ';
+    i += 1
+  }
+  curr = 0;
+  steps = 0;
+  status = 0;
+  options = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  rstButton.style.visibility = 'hidden';
+  bottomText.innerText = '';
 }
