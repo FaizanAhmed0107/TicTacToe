@@ -15,7 +15,7 @@ simple, clean interface and single-player functionality against a basic AI oppon
 
 ## Demo
 
-You can try out the live demo of the game here: [Tic Tac Toe Web App](https://mrunknown101331.github.io/TicTacToe/)
+You can try out the live demo of the game here: [Tic Tac Toe Web App](https://faizanahmed0107.github.io/TicTacToe/)
 
 ## Getting Started
 
