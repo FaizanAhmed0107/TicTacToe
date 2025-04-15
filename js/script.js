@@ -1,3 +1,5 @@
+import {getNext} from "./MiniMax.js";
+
 const button1 = document.querySelector('#b1');
 const button2 = document.querySelector('#b2');
 const button3 = document.querySelector('#b3');
@@ -160,12 +162,14 @@ function block() {
 }
 
 function AIInput() {
-    let x;
-    if ((x = win()) === -1) {
-        if ((x = block()) === -1) {
-            x = options[Math.floor(Math.random() * options.length)];
-        }
-    }
+    const res = getNext(playBox, curr, -Infinity, Infinity);
+    const x = res.row * 3 + res.col + 1;
+    // let x;
+    // if ((x = win()) === -1) {
+    //     if ((x = block()) === -1) {
+    //         x = options[Math.floor(Math.random() * options.length)];
+    //     }
+    // }
     click(x);
 }
 
