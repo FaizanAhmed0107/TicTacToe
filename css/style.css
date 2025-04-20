@@ -1,7 +1,7 @@
 #grid {
     --size: min(90vh, 90vw);
-    width: var(--size);
-    height: var(--size);
+    width: calc(var(--size) * 0.9);
+    height: calc(var(--size) * 0.9);
     max-height: 14cm;
     max-width: 14cm;
     gap: 3%;
