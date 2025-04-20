@@ -44,6 +44,17 @@ button8.onclick = clkButton8;
 button9.onclick = clkButton9;
 rstButton.onclick = restart;
 
+function setDisable(state) {
+    button1.disabled = state;
+    button2.disabled = state;
+    button3.disabled = state;
+    button4.disabled = state;
+    button5.disabled = state;
+    button6.disabled = state;
+    button7.disabled = state;
+    button8.disabled = state;
+    button9.disabled = state;
+}
 
 function getVal(pos) {
     if (pos === 1)
@@ -162,6 +173,7 @@ function block() {
 }
 
 function AIInput() {
+    setDisable(true);
     const res = getNext(playBox, curr, -Infinity, Infinity);
     const x = res.row * 3 + res.col + 1;
     // let x;
@@ -170,7 +182,10 @@ function AIInput() {
     //         x = options[Math.floor(Math.random() * options.length)];
     //     }
     // }
-    click(x);
+    setTimeout(() => {
+        click(x);
+        setDisable(false);
+    }, 500);
 }
 
 function clkButton1() {
@@ -282,4 +297,5 @@ function restart() {
     options = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     rstButton.style.visibility = 'hidden';
     bottomText.innerText = '';
+    topText.innerText = "Player " + (curr + 1) + "'s turn";
 }
